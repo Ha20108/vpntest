@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contant %}
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8">
+    <title>All Davices</title>
+    
+    
+    
+        <link rel="stylesheet" href="{% static 'css/style11.css' %}">
+        
+  
+    
+  </head>
+  <style>
+    .contact_btt a {
+      width: 100%;
+      float: left;
+      font-size: 16px;
+      color: #ffffff;
+      background-color: #143a51;
+      text-align: center;
+      padding: 10px 0px;
+    }
+    .contact_btt{
+      width: 169px;
+      float: center;
+
+  
+    }
+        th {
+  height: 60px;
+  background: #FFED86;
+  font-size: 16px;
+}
+
+    </style>
+
+<body>
+
+  <div class="header_section haeder_main">
+
+    <!-- partial:index.partial.html -->
+  <center>
+    <h1>
+      All Your Router
+    </h1>
+
+
+
+    <h1>
+      can add and remove your davice
+    </h1>
+    <div class="contact_btt"><a href="{% url 'newdvice' %}" >add new router</a></div>
+
+  </center> 
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Name
+            </th>
+            <th>
+              Host
+            </th>
+            <th>
+              USer
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th colspan='4'>
+              All Davice
+            </th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for device in devices %}
+            <tr>
+              <td>{{ device.name }}</td>
+              <td>{{ device.host }}</td>
+              <td>{{ device.username }}</td>
+              <td class='select'>
+                <a class='button'>
+                <form  method="post" action="{% url 'delete_device' device.id %}">
+                  {% csrf_token %}
+                  <button  type="submit" >Delete</button>
+                </form>
+                </a>
+                <a class='button' >
+                  <form method="post" action="{% url 'edit_device' device.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Edit</button>
+                  </form>
+                </a>
+                <a class='button' >
+                  <form method="post" action="{% url 'device_info' device.id %}">
+                    {% csrf_token %}
+                    <button type="submit">login</button>
+                  </form>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <!-- <div class='detail'>
+        <div class='detail-container'>
+          <dl>
+            <dt>
+              Provider Name
+            </dt>
+            <dd>
+              John Doe
+            </dd>
+            <dt>
+              E-mail
+            </dt>
+            <dd>
+              email@example.com
+            </dd>
+            <dt>
+              City
+            </dt>
+            <dd>
+              Detroit
+            </dd>
+            <dt>
+              Phone-Number
+            </dt>
+            <dd>
+              555-555-5555
+            </dd>
+            <dt>
+              Last Update
+            </dt>
+            <dd>
+              Jun 20 2014
+            </dd>
+            <dt>
+              Notes
+            </dt>
+            <dd>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+            </dd>
+          </dl>
+        </div>
+        <div class='detail-nav'>
+          <button class='close'>
+            Close
+          </button>
+        </div>
+      </div>  -->
+    </main>
+    <!-- partial -->
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="js/script.js"></script>
+
+    </body>
+    </html>
+    {% endblock %}
+    <form class='button' method="post" action="{% url 'delete_device' device.id %}">
+      {% csrf_token %}
+      <button type="submit">Delete</button>
+  </div>
+</form>
+</td>
+
